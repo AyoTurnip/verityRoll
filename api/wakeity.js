@@ -2,15 +2,15 @@ export default function handler(req, res)
 {
   const user = req.query.user || "Viewer";
 
-  // tiers
+  // tiers (added 'denom' for safe math)
   const TIERS =
   {
-    common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20 },
-    uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5 },
-    rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2 },
-    epic:      { label: "Epic 🟣",      chance: "1 in 100",   weight: 1 },
-    legendary: { label: "Legendary 🟡", chance: "1 in 500",   weight: 0.2 },
-    mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1 }
+    common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20,  denom: 5 },
+    uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5,   denom: 20 },
+    rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2,   denom: 50 },
+    epic:      { label: "Epic 🟣",      chance: "1 in 100",   weight: 1,   denom: 100 },
+    legendary: { label: "Legendary 🟡", chance: "1 in 500",   weight: 0.2, denom: 500 },
+    mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1, denom: 1000 }
   };
 
   // verity variants
@@ -41,24 +41,26 @@ export default function handler(req, res)
       { tier: "rare", name: "Rarity" },
       { tier: "rare", name: "Vulnerability" },
       { tier: "rare", name: "Fatality" },
+      { tier: "rare", name: "Happity" },
+      { tier: "rare", name: "Profitability" },
+      { tier: "rare", name: "Antiverity" },
+      { tier: "rare", name: "Luckity" },
+      { tier: "rare", name: "Cubeity" },
+      { tier: "rare", name: "Weirdity" },
+      { tier: "rare", name: "Invisibility" },
+      { tier: "rare", name: "Community" },
+      { tier: "rare", name: "Gravity" },
+      { tier: "rare", name: "Equality" },
   
       // epic
-      { tier: "epic", name: "Happity" },
-      { tier: "epic", name: "Profitability" },
       { tier: "epic", name: "Kirkity" },
-      { tier: "epic", name: "Antiverity" },
-      { tier: "epic", name: "Luckity" },
-      { tier: "epic", name: "Cubeity" },
-      { tier: "epic", name: "Weirdity" },
       { tier: "epic", name: "Geometrity" },
       { tier: "epic", name: "Sussity" },
-      { tier: "epic", name: "Invisibility" },
       { tier: "epic", name: "Greedity" },
       { tier: "epic", name: "Stupidity" },
       { tier: "epic", name: "Homosexuality" },
       { tier: "epic", name: "Phonkity" },
       { tier: "epic", name: "Israelity" },
-      { tier: "epic", name: "Community" },
       { tier: "epic", name: "Humanity" },
       { tier: "epic", name: "Entity" },
       { tier: "epic", name: "Jerkity" },
@@ -89,11 +91,10 @@ export default function handler(req, res)
       { tier: "mythic", name: "CairoXity" },
   ];
 
-  // Automatically builds the full item pool using your settings above
-  const pool = rawPool.map(item =>
-  {
+  // item pool
+  const pool = rawPool.map(item => {
     const t = TIERS[item.tier];
-    return { rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
+    return { tier: item.tier, rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
   });
 
   const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
@@ -110,8 +111,38 @@ export default function handler(req, res)
     random -= item.weight;
   }
 
-  // Plain text response for StreamElements (under 400 bytes limit)
+  // types of verities
+  let prefix = "";
+  let emoji = "";
+  let multiplier = 1;
+
+  const modRoll = Math.random();
+  if (modRoll < 0.0001) {
+    prefix = "Rainbow ";
+    emoji = " 🌈";
+    multiplier = 10000;
+  } else if (modRoll < 0.001) {
+    prefix = "Golden ";
+    emoji = " 🌟";
+    multiplier = 1000;
+  } else if (modRoll < 0.01) {
+    prefix = "Shiny ";
+    emoji = " ✨";
+    multiplier = 100;
+  }
+
+  let finalName = prefix + rolledItem.name;
+  let finalRarity = rolledItem.rarity + emoji;
+  let finalChance = rolledItem.chance;
+
+  // chance text
+  if (multiplier > 1) {
+    const baseDenom = TIERS[rolledItem.tier].denom;
+    const newDenom = baseDenom * multiplier;
+    finalChance = `1 in ${newDenom.toLocaleString()}`;
+  }
+
+  // streamelements message
   res.setHeader("Content-Type", "text/plain");
-  res.status(200).send(`${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
-  );
+  res.status(200).send(`${finalName}! [${finalRarity}] (Chance: ${finalChance})`);
 }
