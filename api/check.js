@@ -53,6 +53,6 @@ export default function handler(req, res) {
   // Plain text response for StreamElements (under 400 bytes limit)
   res.setHeader("Content-Type", "text/plain");
   res.status(200).send(
-    `[${rolledItem.rarity}] ${rolledItem.name}! (Chance: ${rolledItem.chance})`
+    `${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
   );
 }
