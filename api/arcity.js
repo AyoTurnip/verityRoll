@@ -29,14 +29,15 @@ export default function handler(req, res)
       { tier: "uncommon", name: "Cuteity" },
       { tier: "uncommon", name: "Obesity" },
       { tier: "uncommon", name: "Moggity" },
+      { tier: "uncommon", name: "Neutrality" },
+      { tier: "uncommon", name: "Clarity" },
+      { tier: "uncommon", name: "Community" },
+      { tier: "uncommon", name: "Smartity" },
+      { tier: "uncommon", name: "Equality" },
   
       // rare
-      { tier: "rare", name: "Larpity" },
       { tier: "rare", name: "Spookity" },
       { tier: "rare", name: "Charity" },
-      { tier: "rare", name: "Neutrality" },
-      { tier: "rare", name: "Smartity" },
-      { tier: "rare", name: "Clarity" },
       { tier: "rare", name: "Anonymity" },
       { tier: "rare", name: "Rarity" },
       { tier: "rare", name: "Vulnerability" },
@@ -48,9 +49,8 @@ export default function handler(req, res)
       { tier: "rare", name: "Cubeity" },
       { tier: "rare", name: "Weirdity" },
       { tier: "rare", name: "Invisibility" },
-      { tier: "rare", name: "Community" },
       { tier: "rare", name: "Gravity" },
-      { tier: "rare", name: "Equality" },
+      { tier: "rare", name: "Disability" },
   
       // epic
       { tier: "epic", name: "Kirkity" },
@@ -65,6 +65,9 @@ export default function handler(req, res)
       { tier: "epic", name: "Entity" },
       { tier: "epic", name: "Jerkity" },
       { tier: "epic", name: "Sexuality" },
+      { tier: "epic", name: "Larpity" },
+      { tier: "epic", name: "Phonkity" },
+      { tier: "epic", name: "Burgerity" },
   
       // legendary
       { tier: "legendary", name: "Doggity" },
