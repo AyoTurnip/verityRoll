@@ -41,24 +41,26 @@ export default function handler(req, res)
       { tier: "rare", name: "Rarity" },
       { tier: "rare", name: "Vulnerability" },
       { tier: "rare", name: "Fatality" },
-  
-      // epic
       { tier: "epic", name: "Happity" },
       { tier: "epic", name: "Profitability" },
-      { tier: "epic", name: "Kirkity" },
       { tier: "epic", name: "Antiverity" },
       { tier: "epic", name: "Luckity" },
       { tier: "epic", name: "Cubeity" },
       { tier: "epic", name: "Weirdity" },
+      { tier: "epic", name: "Invisibility" },
+      { tier: "epic", name: "Community" },
+      { tier: "epic", name: "Gravity" },
+      { tier: "epic", name: "Equality" },
+  
+      // epic
+      { tier: "epic", name: "Kirkity" },
       { tier: "epic", name: "Geometrity" },
       { tier: "epic", name: "Sussity" },
-      { tier: "epic", name: "Invisibility" },
       { tier: "epic", name: "Greedity" },
       { tier: "epic", name: "Stupidity" },
       { tier: "epic", name: "Homosexuality" },
       { tier: "epic", name: "Phonkity" },
       { tier: "epic", name: "Israelity" },
-      { tier: "epic", name: "Community" },
       { tier: "epic", name: "Humanity" },
       { tier: "epic", name: "Entity" },
       { tier: "epic", name: "Jerkity" },
@@ -94,7 +96,7 @@ export default function handler(req, res)
       { tier: "mythic", name: "Terminatity" },
     ];
 
-  // Automatically builds the full item pool using your settings above
+  // item pool
   const pool = rawPool.map(item => {
     const t = TIERS[item.tier];
     return { tier: item.tier, rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
@@ -114,7 +116,7 @@ export default function handler(req, res)
     random -= item.weight;
   }
 
-  // Roll for special modifiers (Rainbow: 0.01%, Golden: 0.1%, Shiny: 1%)
+  // types of verities
   let prefix = "";
   let emoji = "";
   let multiplier = 1;
@@ -128,7 +130,7 @@ export default function handler(req, res)
     prefix = "Golden ";
     emoji = " 🌟";
     multiplier = 1000;
-  } else if (modRoll < 0.5) {
+  } else if (modRoll < 0.01) {
     prefix = "Shiny ";
     emoji = " ✨";
     multiplier = 100;
@@ -138,14 +140,14 @@ export default function handler(req, res)
   let finalRarity = rolledItem.rarity + emoji;
   let finalChance = rolledItem.chance;
 
-  // Update chance text safely using the numeric denom
+  // chance text
   if (multiplier > 1) {
     const baseDenom = TIERS[rolledItem.tier].denom;
     const newDenom = baseDenom * multiplier;
     finalChance = `1 in ${newDenom.toLocaleString()}`;
   }
 
-  // Plain text response for StreamElements (under 400 bytes limit)
+  // streamelements message
   res.setHeader("Content-Type", "text/plain");
   res.status(200).send(`${finalName}! [${finalRarity}] (Chance: ${finalChance})`);
 }
