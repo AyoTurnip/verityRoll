@@ -1,8 +1,10 @@
-export default function handler(req, res) {
+export default function handler(req, res)
+{
   const user = req.query.user || "Viewer";
 
   // --- EASILY ADJUST CHANCES & WEIGHTS HERE ---
-  const TIERS = {
+  const TIERS =
+  {
     common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20 },
     uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5 },
     rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2 },
@@ -12,7 +14,8 @@ export default function handler(req, res) {
   };
 
   // --- ITEM LIST (Only tier and name are needed now!) ---
-  const rawPool = [
+  const rawPool =
+    [
       // Common
       { tier: "common", name: "Verity" },
       { tier: "common", name: "Falsity" },
@@ -77,7 +80,8 @@ export default function handler(req, res) {
   ];
 
   // Automatically builds the full item pool using your settings above
-  const pool = rawPool.map(item => {
+  const pool = rawPool.map(item =>
+  {
     const t = TIERS[item.tier];
     return { rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
   });
