@@ -2,15 +2,15 @@ export default function handler(req, res)
 {
   const user = req.query.user || "Viewer";
 
-  // tiers
+  // tiers (added 'denom' for safe math)
   const TIERS =
   {
-    common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20 },
-    uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5 },
-    rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2 },
-    epic:      { label: "Epic 🟣",      chance: "1 in 100",   weight: 1 },
-    legendary: { label: "Legendary 🟡", chance: "1 in 500",   weight: 0.2 },
-    mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1 }
+    common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20,  denom: 5 },
+    uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5,   denom: 20 },
+    rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2,   denom: 50 },
+    epic:      { label: "Epic 🟣",      chance: "1 in 100",   weight: 1,   denom: 100 },
+    legendary: { label: "Legendary 🟡", chance: "1 in 500",   weight: 0.2, denom: 500 },
+    mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1, denom: 1000 }
   };
 
   // verity variants
@@ -124,18 +124,18 @@ export default function handler(req, res)
   let multiplier = 1;
 
   const modRoll = Math.random();
-  if (modRoll < 0.0001) {
+  if (modRoll < 0.001) {
     prefix = "Rainbow ";
     emoji = " 🌈";
-    multiplier = 10000;
-  } else if (modRoll < 0.001) {
-    prefix = "Golden ";
-    emoji = " 🌟";
     multiplier = 1000;
   } else if (modRoll < 0.01) {
+    prefix = "Golden ";
+    emoji = " 🌟";
+    multiplier = 100;
+  } else if (modRoll < 0.1) {
     prefix = "Shiny ";
     emoji = " ✨";
-    multiplier = 100;
+    multiplier = 10;
   }
 
   let finalName = prefix + rolledItem.name;
