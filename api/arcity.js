@@ -128,7 +128,7 @@ export default function handler(req, res)
     prefix = "Golden ";
     emoji = " 🌟";
     multiplier = 1000;
-  } else if (modRoll < 0.01) {
+  } else if (modRoll < 0.5) {
     prefix = "Shiny ";
     emoji = " ✨";
     multiplier = 100;
