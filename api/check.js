@@ -24,19 +24,19 @@ export default function handler(req, res) {
       { rarity: "Rare", name: "Smartity", chance: "1 in 50", weight: 2 },
       { rarity: "Rare", name: "Clarity", chance: "1 in 50", weight: 2 },
   
-      // Epic (8% total weight) -> 1% per item (1 in 125)
-      { rarity: "Epic", name: "Happity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Profitability", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Kirkity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Antiverity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Luckity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Cubeity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Weirdity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Geometrity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Sussity", chance: "1 in 125", weight: 1 },
-      { rarity: "Epic", name: "Invisibility", chance: "1 in 125", weight: 1 },
+      // Epic (8% total weight) -> 1% per item (1 in 100)
+      { rarity: "Epic", name: "Happity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Profitability", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Kirkity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Antiverity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Luckity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Cubeity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Weirdity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Geometrity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Sussity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic", name: "Invisibility", chance: "1 in 100", weight: 1 },
   
-      // Legendary (4% total weight) -> ~0.2% per item (1 in 500)
+      // Legendary (4% total weight) -> 0.2% per item (1 in 500)
       { rarity: "Legendary", name: "Doggity", chance: "1 in 150", weight: 0.2 },
       { rarity: "Legendary", name: "Zoinkity", chance: "1 in 150", weight: 0.2 },
       { rarity: "Legendary", name: "Wpopoffity", chance: "1 in 150", weight: 0.2 },
