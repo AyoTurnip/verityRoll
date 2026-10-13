@@ -23,6 +23,8 @@ export default function handler(req, res) {
       { rarity: "Rare 🔵", name: "Neutrality", chance: "1 in 50", weight: 2 },
       { rarity: "Rare 🔵", name: "Smartity", chance: "1 in 50", weight: 2 },
       { rarity: "Rare 🔵", name: "Clarity", chance: "1 in 50", weight: 2 },
+      { rarity: "Rare 🔵", name: "Anonymity", chance: "1 in 50", weight: 2 },
+      { rarity: "Rare 🔵", name: "Rarity", chance: "1 in 50", weight: 2 },
   
       // Epic (8% total weight) -> 1% per item (1 in 100)
       { rarity: "Epic 🟣", name: "Happity", chance: "1 in 100", weight: 1 },
@@ -35,6 +37,8 @@ export default function handler(req, res) {
       { rarity: "Epic 🟣", name: "Geometrity", chance: "1 in 100", weight: 1 },
       { rarity: "Epic 🟣", name: "Sussity", chance: "1 in 100", weight: 1 },
       { rarity: "Epic 🟣", name: "Invisibility", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic 🟣", name: "Greedity", chance: "1 in 100", weight: 1 },
+      { rarity: "Epic 🟣", name: "Stupidity", chance: "1 in 100", weight: 1 },
   
       // Legendary (4% total weight) -> 0.2% per item (1 in 500)
       { rarity: "Legendary 🟡", name: "Doggity", chance: "1 in 150", weight: 0.2 },
