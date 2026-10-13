@@ -3,21 +3,21 @@ export default function handler(req, res)
   const user = req.query.user || "Viewer";
 
   const pool = [
-      // Common (50% total weight) -> 10% per item (~1 in 10)
-      { rarity: "Common ⚪", name: "Verity", chance: "1 in 10", weight: 10 },
-      { rarity: "Common ⚪", name: "Falsity", chance: "1 in 10", weight: 10 },
-      { rarity: "Common ⚪", name: "Lovity", chance: "1 in 10", weight: 10 },
-      { rarity: "Common ⚪", name: "Curiosity", chance: "1 in 10", weight: 10 },
-      { rarity: "Common ⚪", name: "Cruelty", chance: "1 in 10", weight: 10 },
+      // Common (1 in 5 chance per item)
+      { rarity: "Common ⚪", name: "Verity", chance: "1 in 5", weight: 20 },
+      { rarity: "Common ⚪", name: "Falsity", chance: "1 in 5", weight: 20 },
+      { rarity: "Common ⚪", name: "Lovity", chance: "1 in 5", weight: 20 },
+      { rarity: "Common ⚪", name: "Curiosity", chance: "1 in 5", weight: 20 },
+      { rarity: "Common ⚪", name: "Cruelty", chance: "1 in 5", weight: 20 },
   
-      // Uncommon (25% total weight) -> 5% per item (1 in 20)
+      // Uncommon (1 in 20 chance per item)
       { rarity: "Uncommon 🟢", name: "Lovity", chance: "1 in 20", weight: 5 },
       { rarity: "Uncommon 🟢", name: "Freakity", chance: "1 in 20", weight: 5 },
       { rarity: "Uncommon 🟢", name: "Cuteity", chance: "1 in 20", weight: 5 },
       { rarity: "Uncommon 🟢", name: "Obesity", chance: "1 in 20", weight: 5 },
       { rarity: "Uncommon 🟢", name: "Moggity", chance: "1 in 20", weight: 5 },
   
-      // Rare (12% total weight) -> 2% per item (1 in 50)
+      // Rare (1 in 50 chance per item)
       { rarity: "Rare 🔵", name: "Larpity", chance: "1 in 50", weight: 2 },
       { rarity: "Rare 🔵", name: "Spookity", chance: "1 in 50", weight: 2 },
       { rarity: "Rare 🔵", name: "Charity", chance: "1 in 50", weight: 2 },
@@ -27,7 +27,7 @@ export default function handler(req, res)
       { rarity: "Rare 🔵", name: "Anonymity", chance: "1 in 50", weight: 2 },
       { rarity: "Rare 🔵", name: "Rarity", chance: "1 in 50", weight: 2 },
   
-      // Epic (8% total weight) -> 1% per item (1 in 100)
+      // Epic (1 in 100 chance per item)
       { rarity: "Epic 🟣", name: "Happity", chance: "1 in 100", weight: 1 },
       { rarity: "Epic 🟣", name: "Profitability", chance: "1 in 100", weight: 1 },
       { rarity: "Epic 🟣", name: "Kirkity", chance: "1 in 100", weight: 1 },
@@ -41,7 +41,7 @@ export default function handler(req, res)
       { rarity: "Epic 🟣", name: "Greedity", chance: "1 in 100", weight: 1 },
       { rarity: "Epic 🟣", name: "Stupidity", chance: "1 in 100", weight: 1 },
   
-      // Legendary (4% total weight) -> 0.2% per item (1 in 500)
+      // Legendary (1 in 500 chance per item)
       { rarity: "Legendary 🟡", name: "Doggity", chance: "1 in 500", weight: 0.2 },
       { rarity: "Legendary 🟡", name: "Zoinkity", chance: "1 in 500", weight: 0.2 },
       { rarity: "Legendary 🟡", name: "Wpopoffity", chance: "1 in 500", weight: 0.2 },
@@ -53,7 +53,7 @@ export default function handler(req, res)
       { rarity: "Legendary 🟡", name: "Bloodbathity", chance: "1 in 500", weight: 0.2 },
       { rarity: "Legendary 🟡", name: "Societity", chance: "1 in 500", weight: 0.2 },
   
-      // Mythic (1% total weight) -> 0.1% per item (1 in 1000)
+      // Mythic (1 in 1,000 chance per item)
       { rarity: "Mythic 🔴", name: "Turnipity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Drongity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Kadenity", chance: "1 in 1,000", weight: 0.1 },
