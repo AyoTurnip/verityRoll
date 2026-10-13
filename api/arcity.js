@@ -94,7 +94,7 @@ export default function handler(req, res)
       { tier: "mythic", name: "Terminatity" },
   ];
 
-  // Automatically builds the full item pool using your settings above
+  // full item pool
   const pool = rawPool.map(item => {
     const t = TIERS[item.tier];
     return { rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
@@ -103,19 +103,50 @@ export default function handler(req, res)
   const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
   let random = Math.random() * totalWeight;
 
-  let rolledItem = pool[0];
+  let rolledItem = { ...pool[0] };
   for (const item of pool)
   {
     if (random < item.weight)
     {
-      rolledItem = item;
+      rolledItem = { ...item };
       break;
     }
     random -= item.weight;
   }
 
-  // Plain text response for StreamElements (under 400 bytes limit)
+// types of verity variants
+  let prefix = "";
+  let emoji = "";
+  let multiplier = 1;
+
+  const modRoll = Math.random();
+  if (modRoll < 0.0001) {
+    prefix = "Rainbow ";
+    emoji = " 🌈";
+    multiplier = 10000;
+  } else if (modRoll < 0.001) {
+    prefix = "Golden ";
+    emoji = " 🌟";
+    multiplier = 1000;
+  } else if (modRoll < 0.01) {
+    prefix = "Shiny ";
+    emoji = " ✨";
+    multiplier = 100;
+  }
+
+  let finalName = prefix + rolledItem.name;
+  let finalRarity = rolledItem.rarity + emoji;
+  let finalChance = rolledItem.chance;
+
+  // update change text
+  if (multiplier > 1) {
+    const baseDenom = parseInt(TIERS[rolledItem.tier].chance.replace(/,/g, '').split(' ')[2]);
+    const newDenom = baseDenom * multiplier;
+    finalChance = `1 in ${newDenom.toLocaleString()}`;
+  }
+
+  // streamelements message
   res.setHeader("Content-Type", "text/plain");
-  res.status(200).send(`${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
+  res.status(200).send(`${finalName}! [${finalRarity}] (Chance: ${finalChance})`
   );
 }
