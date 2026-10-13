@@ -120,18 +120,18 @@ export default function handler(req, res)
   let multiplier = 1;
 
   const modRoll = Math.random();
-  if (modRoll < 0.0001) {
+  if (modRoll < 0.001) {
     prefix = "Rainbow ";
     emoji = " 🌈";
-    multiplier = 10000;
-  } else if (modRoll < 0.001) {
-    prefix = "Golden ";
-    emoji = " 🌟";
     multiplier = 1000;
   } else if (modRoll < 0.01) {
+    prefix = "Golden ";
+    emoji = " 🌟";
+    multiplier = 100;
+  } else if (modRoll < 0.1) {
     prefix = "Shiny ";
     emoji = " ✨";
-    multiplier = 100;
+    multiplier = 10;
   }
 
   let finalName = prefix + rolledItem.name;
