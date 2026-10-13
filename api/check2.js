@@ -1,4 +1,5 @@
-export default function handler(req, res) {
+export default function handler(req, res)
+{
   const user = req.query.user || "Viewer";
 
   const pool = [
@@ -69,8 +70,10 @@ export default function handler(req, res) {
   let random = Math.random() * totalWeight;
 
   let rolledItem = pool[0];
-  for (const item of pool) {
-    if (random < item.weight) {
+  for (const item of pool)
+  {
+    if (random < item.weight)
+    {
       rolledItem = item;
       break;
     }
@@ -79,7 +82,6 @@ export default function handler(req, res) {
 
   // Plain text response for StreamElements (under 400 bytes limit)
   res.setHeader("Content-Type", "text/plain");
-  res.status(200).send(
-    `${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
+  res.status(200).send(`${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
   );
 }
