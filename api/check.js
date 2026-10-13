@@ -58,7 +58,7 @@ export default function handler(req, res) {
       { rarity: "Mythic 🔴", name: "P Diddity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "2salvity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Redhotity", chance: "1 in 1,000", weight: 0.1 },
-      { rarity: "Mythic 🔴", name: "Wasuretity", chance: "1 in 1,000", weight: 0.1 },
+      { rarity: "Mythic 🔴", name: "Wasurarity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Sonic Wavity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Black Blizzardity", chance: "1 in 1,000", weight: 0.1 },
       { rarity: "Mythic 🔴", name: "Josh Bukkity", chance: "1 in 1,000", weight: 0.1 },
@@ -69,8 +69,10 @@ export default function handler(req, res) {
   let random = Math.random() * totalWeight;
 
   let rolledItem = pool[0];
-  for (const item of pool) {
-    if (random < item.weight) {
+  for (const item of pool)
+  {
+    if (random < item.weight)
+    {
       rolledItem = item;
       break;
     }
@@ -79,7 +81,6 @@ export default function handler(req, res) {
 
   // Plain text response for StreamElements (under 400 bytes limit)
   res.setHeader("Content-Type", "text/plain");
-  res.status(200).send(
-    `${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
+  res.status(200).send(`${rolledItem.name}! [${rolledItem.rarity}] (Chance: ${rolledItem.chance})`
   );
 }
