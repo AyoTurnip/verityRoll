@@ -124,7 +124,7 @@ export default function handler(req, res)
   let multiplier = 1;
 
   const modRoll = Math.random();
-  if (modRoll < 0.5) {
+  if (modRoll < 0.001) {
     prefix = "Rainbow ";
     emoji = " 🌈";
     multiplier = 1000;
