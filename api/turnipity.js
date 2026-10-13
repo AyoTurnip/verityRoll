@@ -87,7 +87,7 @@ export default function handler(req, res)
       { tier: "mythic", name: "Wakeity" },
       { tier: "mythic", name: "Arcity" },
       { tier: "mythic", name: "Bepility" },
-      { tier: "mythic", name: "Nhelvity" },
+      { tier: "mythic", name: "Verdant Landcapity" },
       { tier: "mythic", name: "Rustity" },
       { tier: "mythic", name: "Bloomity" },
       { tier: "mythic", name: "Nhelvity" },
