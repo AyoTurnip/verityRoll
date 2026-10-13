@@ -2,8 +2,9 @@ export default function handler(req, res)
 {
   const user = req.query.user || "Viewer";
 
-  // --- EASILY ADJUST CHANCES & WEIGHTS HERE ---
-  const TIERS = {
+  // tiers
+  const TIERS =
+  {
     common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20 },
     uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5 },
     rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2 },
@@ -12,23 +13,24 @@ export default function handler(req, res)
     mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1 }
   };
 
-  // --- ITEM LIST (Only tier and name are needed now!) ---
-  const rawPool = [
-      // Common
+  // verity variants
+  const rawPool =
+    [
+      // common
       { tier: "common", name: "Verity" },
       { tier: "common", name: "Falsity" },
       { tier: "common", name: "Lovity" },
       { tier: "common", name: "Curiosity" },
       { tier: "common", name: "Cruelty" },
   
-      // Uncommon
+      // uncommon
       { tier: "uncommon", name: "Lovity" },
       { tier: "uncommon", name: "Freakity" },
       { tier: "uncommon", name: "Cuteity" },
       { tier: "uncommon", name: "Obesity" },
       { tier: "uncommon", name: "Moggity" },
   
-      // Rare
+      // rare
       { tier: "rare", name: "Larpity" },
       { tier: "rare", name: "Spookity" },
       { tier: "rare", name: "Charity" },
@@ -37,8 +39,10 @@ export default function handler(req, res)
       { tier: "rare", name: "Clarity" },
       { tier: "rare", name: "Anonymity" },
       { tier: "rare", name: "Rarity" },
+      { tier: "rare", name: "Vulnerability" },
+      { tier: "rare", name: "Fatality" },
   
-      // Epic
+      // epic
       { tier: "epic", name: "Happity" },
       { tier: "epic", name: "Profitability" },
       { tier: "epic", name: "Kirkity" },
@@ -51,8 +55,16 @@ export default function handler(req, res)
       { tier: "epic", name: "Invisibility" },
       { tier: "epic", name: "Greedity" },
       { tier: "epic", name: "Stupidity" },
+      { tier: "epic", name: "Homosexuality" },
+      { tier: "epic", name: "Phonkity" },
+      { tier: "epic", name: "Israelity" },
+      { tier: "epic", name: "Community" },
+      { tier: "epic", name: "Humanity" },
+      { tier: "epic", name: "Entity" },
+      { tier: "epic", name: "Jerkity" },
+      { tier: "epic", name: "Sexuality" },
   
-      // Legendary
+      // legendary
       { tier: "legendary", name: "Doggity" },
       { tier: "legendary", name: "Zoinkity" },
       { tier: "legendary", name: "Wpopoffity" },
@@ -64,7 +76,7 @@ export default function handler(req, res)
       { tier: "legendary", name: "Bloodbathity" },
       { tier: "legendary", name: "Societity" },
   
-      // Mythic
+      // mythic
       { tier: "mythic", name: "Turnipity" },
       { tier: "mythic", name: "Drongity" },
       { tier: "mythic", name: "Kadenity" },
