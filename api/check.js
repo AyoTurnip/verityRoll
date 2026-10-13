@@ -49,6 +49,8 @@ export default function handler(req, res) {
       { rarity: "Legendary 🟡", name: "Angelicity", chance: "1 in 150", weight: 0.2 },
       { rarity: "Legendary 🟡", name: "Conixity", chance: "1 in 150", weight: 0.2 },
       { rarity: "Legendary 🟡", name: "Trickity", chance: "1 in 150", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Bloodbathity", chance: "1 in 150", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Societity", chance: "1 in 150", weight: 0.2 },
   
       // Mythic (1% total weight) -> 0.1% per item (1 in 1000)
       { rarity: "Mythic 🔴", name: "Wakeity", chance: "1 in 1,000", weight: 0.1 },
