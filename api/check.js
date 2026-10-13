@@ -41,16 +41,16 @@ export default function handler(req, res) {
       { rarity: "Epic 🟣", name: "Stupidity", chance: "1 in 100", weight: 1 },
   
       // Legendary (4% total weight) -> 0.2% per item (1 in 500)
-      { rarity: "Legendary 🟡", name: "Doggity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Zoinkity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Wpopoffity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Griefity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Heliopolisity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Angelicity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Conixity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Trickity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Bloodbathity", chance: "1 in 150", weight: 0.2 },
-      { rarity: "Legendary 🟡", name: "Societity", chance: "1 in 150", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Doggity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Zoinkity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Wpopoffity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Griefity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Heliopolisity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Angelicity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Conixity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Trickity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Bloodbathity", chance: "1 in 500", weight: 0.2 },
+      { rarity: "Legendary 🟡", name: "Societity", chance: "1 in 500", weight: 0.2 },
   
       // Mythic (1% total weight) -> 0.1% per item (1 in 1000)
       { rarity: "Mythic 🔴", name: "Wakeity", chance: "1 in 1,000", weight: 0.1 },
