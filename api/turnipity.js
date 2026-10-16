@@ -204,8 +204,8 @@ export default function handler(req, res) {
   res.setHeader("Content-Type", "text/plain");
   res.status(200).send(
     `${finalName}! [${finalRarity}] ` +
-    `(Rarity + Type: ${rarityTypeChance} | ` +
-    `Specific Verity: ${specificChance})`
+    `(Rarity: ${rarityTypeChance} | ` +
+    `Verity: ${specificChance})`
   );
 }
 
