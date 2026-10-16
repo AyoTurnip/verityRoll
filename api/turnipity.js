@@ -1,8 +1,10 @@
-export default function handler(req, res) {
+export default function handler(req, res) 
+{
   const user = req.query.user || "Viewer";
 
   // hey it's me it's rarity
-  const TIERS = {
+  const TIERS = 
+  {
     common:    { label: "Common ⚪",    weight: 20 },
     uncommon:  { label: "Uncommon 🟢",  weight: 5 },
     rare:      { label: "Rare 🔵",      weight: 2 },
