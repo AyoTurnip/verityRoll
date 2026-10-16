@@ -2,7 +2,7 @@
 export default function handler(req, res) {
   const user = req.query.user || "Viewer";
 
-  // Rarity tiers: each item in a tier receives the tier's weight.
+  // hey it's me it's rarity
   const TIERS = {
     common:    { label: "Common ⚪",    weight: 20 },
     uncommon:  { label: "Uncommon 🟢",  weight: 5 },
@@ -12,17 +12,17 @@ export default function handler(req, res) {
     mythic:    { label: "Mythic 🔴",    weight: 0.1 }
   };
 
-  // Verity variants
+  // variants
   const rawPool = 
     [
-    // Common
+    // common
     { tier: "common", name: "Verity" },
     { tier: "common", name: "Falsity" },
     { tier: "common", name: "Lovity" },
     { tier: "common", name: "Curiosity" },
     { tier: "common", name: "Cruelty" },
 
-    // Uncommon
+    // uncommon
     { tier: "uncommon", name: "Helpity" },
     { tier: "uncommon", name: "Freakity" },
     { tier: "uncommon", name: "Cuteity" },
@@ -34,7 +34,7 @@ export default function handler(req, res) {
     { tier: "uncommon", name: "Smartity" },
     { tier: "uncommon", name: "Equality" },
 
-    // Rare
+    // rare
     { tier: "rare", name: "Spookity" },
     { tier: "rare", name: "Charity" },
     { tier: "rare", name: "Anonymity" },
@@ -51,7 +51,7 @@ export default function handler(req, res) {
     { tier: "rare", name: "Gravity" },
     { tier: "rare", name: "Disability" },
 
-    // Epic
+    // epic
     { tier: "epic", name: "Kirkity" },
     { tier: "epic", name: "Geometrity" },
     { tier: "epic", name: "Sussity" },
@@ -68,7 +68,7 @@ export default function handler(req, res) {
     { tier: "epic", name: "Liability" },
     { tier: "epic", name: "Burgerity" },
 
-    // Legendary
+    // legendary
     { tier: "legendary", name: "Doggity" },
     { tier: "legendary", name: "Zoinkity" },
     { tier: "legendary", name: "Wpopoffity" },
@@ -80,7 +80,7 @@ export default function handler(req, res) {
     { tier: "legendary", name: "Bloodbathity" },
     { tier: "legendary", name: "Societity" },
 
-    // Mythic
+    // mythic
     { tier: "mythic", name: "Turnipity" },
     { tier: "mythic", name: "Drongity" },
     { tier: "mythic", name: "Kadenity" },
@@ -97,7 +97,7 @@ export default function handler(req, res) {
     { tier: "mythic", name: "Nhelvity" }
   ];
 
-  // Build weighted item pool
+  // item poll
   const pool = rawPool.map(item => ({
     ...item,
     rarity: TIERS[item.tier].label,
@@ -109,7 +109,7 @@ export default function handler(req, res) {
     0
   );
 
-  // Roll an item
+  // roll
   let roll = Math.random() * totalWeight;
   let rolledItem = pool[pool.length - 1];
 
@@ -124,7 +124,7 @@ export default function handler(req, res) {
     }
   }
 
-  // Roll variant
+  // variant of variant
   const variants = 
     [
     {
@@ -168,12 +168,12 @@ export default function handler(req, res) {
     }
   }
 
-  // Calculate the exact probability of this item + variant.
+  // probability
   const itemProbability = rolledItem.weight / totalWeight;
   const finalProbability =
     itemProbability * variant.probability;
 
-  // Format as a percentage.
+  // percentage
   const chance = (finalProbability * 100)
     .toLocaleString("en-US", {
       maximumSignificantDigits: 6
@@ -182,7 +182,7 @@ export default function handler(req, res) {
   const finalName = variant.prefix + rolledItem.name;
   const finalRarity = rolledItem.rarity + variant.emoji;
 
-  // Twitch / StreamElements response
+  // streamelements response
   res.setHeader("Content-Type", "text/plain");
   res.status(200).send(
     `${finalName}! [${finalRarity}] (${chance})`
