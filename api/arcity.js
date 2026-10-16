@@ -1,19 +1,17 @@
-export default function handler(req, res)
-{
+export default function handler(req, res) {
   const user = req.query.user || "Viewer";
 
-  // tiers (added 'denom' for safe math)
-  const TIERS =
-  {
-    common:    { label: "Common ⚪",    chance: "1 in 5",     weight: 20,  denom: 5 },
-    uncommon:  { label: "Uncommon 🟢",  chance: "1 in 20",    weight: 5,   denom: 20 },
-    rare:      { label: "Rare 🔵",      chance: "1 in 50",    weight: 2,   denom: 50 },
-    epic:      { label: "Epic 🟣",      chance: "1 in 100",   weight: 1,   denom: 100 },
-    legendary: { label: "Legendary 🟡", chance: "1 in 500",   weight: 0.2, denom: 500 },
-    mythic:    { label: "Mythic 🔴",    chance: "1 in 1,000", weight: 0.1, denom: 1000 }
+  // hey it's me it's rarity
+  const TIERS = {
+    common:    { label: "Common ⚪",    weight: 20 },
+    uncommon:  { label: "Uncommon 🟢",  weight: 5 },
+    rare:      { label: "Rare 🔵",      weight: 2 },
+    epic:      { label: "Epic 🟣",      weight: 1 },
+    legendary: { label: "Legendary 🟡", weight: 0.2 },
+    mythic:    { label: "Mythic 🔴",    weight: 0.1 }
   };
 
-  // verity variants
+  // variants
   const rawPool =
     [
       // common
@@ -24,7 +22,7 @@ export default function handler(req, res)
       { tier: "common", name: "Cruelty" },
   
       // uncommon
-      { tier: "uncommon", name: "Lovity" },
+      { tier: "uncommon", name: "Helpity" },
       { tier: "uncommon", name: "Freakity" },
       { tier: "uncommon", name: "Cuteity" },
       { tier: "uncommon", name: "Obesity" },
@@ -66,7 +64,7 @@ export default function handler(req, res)
       { tier: "epic", name: "Jerkity" },
       { tier: "epic", name: "Sexuality" },
       { tier: "epic", name: "Larpity" },
-      { tier: "epic", name: "Phonkity" },
+      { tier: "epic", name: "Liability" },
       { tier: "epic", name: "Burgerity" },
   
       // legendary
@@ -99,58 +97,114 @@ export default function handler(req, res)
       { tier: "mythic", name: "Terminatity" },
     ];
 
-  // item pool
-  const pool = rawPool.map(item => {
-    const t = TIERS[item.tier];
-    return { tier: item.tier, rarity: t.label, name: item.name, chance: t.chance, weight: t.weight };
-  });
+   // item poll
+  const pool = rawPool.map(item => ({
+    ...item,
+    rarity: TIERS[item.tier].label,
+    weight: TIERS[item.tier].weight
+  }));
 
-  const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
-  let random = Math.random() * totalWeight;
+  const totalWeight = pool.reduce(
+    (sum, item) => sum + item.weight,
+    0
+  );
 
-  let rolledItem = pool[0];
-  for (const item of pool)
+  // roll
+  let roll = Math.random() * totalWeight;
+  let rolledItem = pool[pool.length - 1];
+
+  for (const item of pool) 
   {
-    if (random < item.weight)
+    roll -= item.weight;
+
+    if (roll < 0) 
     {
       rolledItem = item;
       break;
     }
-    random -= item.weight;
   }
 
-  // types of verities
-  let prefix = "";
-  let emoji = "";
-  let multiplier = 1;
+  // variant of variant
+  const variants = 
+    [
+    {
+      prefix: "",
+      emoji: "",
+      multiplier: 1,
+      probability: 0.90
+    },
+    {
+      prefix: "Shiny ",
+      emoji: " ✨",
+      multiplier: 10,
+      probability: 0.09
+    },
+    {
+      prefix: "Golden ",
+      emoji: " 👑",
+      multiplier: 100,
+      probability: 0.009
+    },
+    {
+      prefix: "Rainbow ",
+      emoji: " 🌈",
+      multiplier: 1000,
+      probability: 0.001
+    }
+  ];
 
-  const modRoll = Math.random();
-  if (modRoll < 0.001) {
-    prefix = "Rainbow ";
-    emoji = " 🌈";
-    multiplier = 1000;
-  } else if (modRoll < 0.01) {
-    prefix = "Golden ";
-    emoji = " 🌟";
-    multiplier = 100;
-  } else if (modRoll < 0.1) {
-    prefix = "Shiny ";
-    emoji = " ✨";
-    multiplier = 10;
+  const variantRoll = Math.random();
+  let cumulative = 0;
+  let variant = variants[variants.length - 1];
+
+  for (const v of variants) 
+  {
+    cumulative += v.probability;
+
+    if (variantRoll < cumulative) 
+    {
+      variant = v;
+      break;
+    }
   }
 
-  let finalName = prefix + rolledItem.name;
-  let finalRarity = rolledItem.rarity + emoji;
-  let finalChance = rolledItem.chance;
 
-  // chance text
-  if (multiplier > 1) {
-    const baseDenom = TIERS[rolledItem.tier].denom;
-    const newDenom = baseDenom * multiplier;
-    finalChance = `1 in ${newDenom.toLocaleString()}`;
-  }
+  // probability of rarity
+  const tierWeight = pool
+    .filter(item => item.tier === rolledItem.tier)
+    .reduce((sum, item) => sum + item.weight, 0);
+
+  const rarityTypeProbability =
+    (tierWeight / totalWeight) * variant.probability;
+
+  // probability of specific verity
+  const specificWeight = pool
+    .filter(item =>
+      item.tier === rolledItem.tier &&
+      item.name === rolledItem.name
+    )
+    .reduce((sum, item) => sum + item.weight, 0);
+
+  const specificProbability =
+    (specificWeight / totalWeight) * variant.probability;
+
+  // percentage
+  const formatPercent = probability =>
+    (probability * 100).toLocaleString("en-US", {
+      maximumSignificantDigits: 6
+    }) + "%";
+
+  const rarityTypeChance = formatPercent(rarityTypeProbability);
+  const specificChance = formatPercent(specificProbability);
+
+  const finalName = variant.prefix + rolledItem.name;
+  const finalRarity = rolledItem.rarity + variant.emoji;
 
   // streamelements message
   res.setHeader("Content-Type", "text/plain");
-  res.status(200).send(`${finalName}! [${finalRarity}] (Chance: ${finalChance})`);
+  res.status(200).send(
+    `${finalName}! [${finalRarity}] ` +
+    `(Rarity: ${rarityTypeChance} | ` +
+    `Verity: ${specificChance})`
+  );
 }
