@@ -168,23 +168,44 @@ export default function handler(req, res) {
     }
   }
 
-  // probability
-  const itemProbability = rolledItem.weight / totalWeight;
-  const finalProbability =
-    itemProbability * variant.probability;
+
+  // probability of rarity
+  const tierWeight = pool
+    .filter(item => item.tier === rolledItem.tier)
+    .reduce((sum, item) => sum + item.weight, 0);
+
+  const rarityTypeProbability =
+    (tierWeight / totalWeight) * variant.probability;
+
+  // probability of specific verity
+  const specificWeight = pool
+    .filter(item =>
+      item.tier === rolledItem.tier &&
+      item.name === rolledItem.name
+    )
+    .reduce((sum, item) => sum + item.weight, 0);
+
+  const specificProbability =
+    (specificWeight / totalWeight) * variant.probability;
 
   // percentage
-  const chance = (finalProbability * 100)
-    .toLocaleString("en-US", {
+  const formatPercent = probability =>
+    (probability * 100).toLocaleString("en-US", {
       maximumSignificantDigits: 6
     }) + "%";
+
+  const rarityTypeChance = formatPercent(rarityTypeProbability);
+  const specificChance = formatPercent(specificProbability);
 
   const finalName = variant.prefix + rolledItem.name;
   const finalRarity = rolledItem.rarity + variant.emoji;
 
-  // streamelements response
+  // streamelements message
   res.setHeader("Content-Type", "text/plain");
   res.status(200).send(
-    `${finalName}! [${finalRarity}] (${chance})`
+    `${finalName}! [${finalRarity}] ` +
+    `(Rarity + Type: ${rarityTypeChance} | ` +
+    `Specific Verity: ${specificChance})`
   );
 }
+
