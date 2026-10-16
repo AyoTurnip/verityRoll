@@ -24,7 +24,7 @@ export default function handler(req, res)
       { tier: "common", name: "Cruelty" },
   
       // uncommon
-      { tier: "uncommon", name: "Lovity" },
+      { tier: "uncommon", name: "Helpity" },
       { tier: "uncommon", name: "Freakity" },
       { tier: "uncommon", name: "Cuteity" },
       { tier: "uncommon", name: "Obesity" },
@@ -66,7 +66,7 @@ export default function handler(req, res)
       { tier: "epic", name: "Jerkity" },
       { tier: "epic", name: "Sexuality" },
       { tier: "epic", name: "Larpity" },
-      { tier: "epic", name: "Phonkity" },
+      { tier: "epic", name: "Liability" },
       { tier: "epic", name: "Burgerity" },
   
       // legendary
