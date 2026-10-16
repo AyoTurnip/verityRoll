@@ -1,4 +1,3 @@
-
 export default function handler(req, res) {
   const user = req.query.user || "Viewer";
 
